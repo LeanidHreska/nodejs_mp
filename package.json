@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prestart": "npm run lint",
     "start": "nodemon --exec npx babel-node app.js",
     "test": "",
     "lint": "npx eslint ./"
