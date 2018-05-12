@@ -8,10 +8,7 @@ export default class DirWatcher {
   constructor() {}
 
   watch(path, delay) {
-    fs.readdir(path, (err, files) => {
-      if (err) throw err;
-      this.pathFiles = files;
-    }); 
+    this.pathFiles = [];
 
     this.delayInterval = setInterval(() => {
       fs.readdir(path, (err, files) => {
