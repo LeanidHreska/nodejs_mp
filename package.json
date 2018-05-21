@@ -33,6 +33,8 @@
   "dependencies": {
     "csvtojson": "1.1.9",
     "eventemitter3": "3.0.1",
-    "lodash": "4.17.10"
+    "lodash": "4.17.10",
+    "minimist": "^1.2.0",
+    "through2": "^2.0.3"
   }
 }
