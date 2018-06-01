@@ -9,13 +9,18 @@ app.get('/api/products', (req, res) => {
 });
 
 app.get('/api/products/:id', (req, res) => {
-  const product = data.products.filter(product => product.id === parseInt(req.params.id));
+  const product = data.products.filter(product => product.id ===req.params.id);
   product === [] ? res.send({}) : res.send(product[0]);
 });
 
+app.get('/api/products/:id/reviews', (req, res) => {
+  const productReviews = data.reviews.filter(review => review.productId ===req.params.id);
+  res.send(productReviews);
+});
 
 app.post('/api/products', (req, res) => {
-  
+  data.products = [ ...data.products, req.body];
+  res.send(req.body);
 });
 
 app.get('/api/users', (req, res) => {
