@@ -1,26 +1,26 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import config from './config/config.json';
-import models from './models';
+// import models from './models';
 
-import Importer from './modules/importer';
-import DirWatcher from './modules/dirwatcher';
+import middlewares from './config/middlewares';
 
-const { User, Product} = models;
+// import Importer from './modules/importer';
+// import DirWatcher from './modules/dirwatcher';
 
-new User();
-new Product();
+// const { User, Product} = models;
 
-const importer = new Importer();
-const watcher = new DirWatcher();
+// new User();
+// new Product();
+
+// const importer = new Importer();
+// const watcher = new DirWatcher();
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+middlewares(app);
 
-importer.listen();
-watcher.watch('data', 5000);
+// importer.listen();
+// watcher.watch('data', 5000);
 
 console.log(config.name);
 
