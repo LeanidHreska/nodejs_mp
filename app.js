@@ -1,18 +1,27 @@
+import express from 'express';
 import config from './config/config.json';
-import models from './models';
+// import models from './models';
 
-import Importer from './modules/importer';
-import DirWatcher from './modules/dirwatcher';
+import middlewares from './config/middlewares';
 
-const { User, Product} = models;
+// import Importer from './modules/importer';
+// import DirWatcher from './modules/dirwatcher';
 
-new User();
-new Product();
+// const { User, Product} = models;
 
-const importer = new Importer();
-const watcher = new DirWatcher();
+// new User();
+// new Product();
 
-importer.listen();
-watcher.watch('data', 5000);
+// const importer = new Importer();
+// const watcher = new DirWatcher();
+
+const app = express();
+
+middlewares(app);
+
+// importer.listen();
+// watcher.watch('data', 5000);
 
 console.log(config.name);
+
+export default app;

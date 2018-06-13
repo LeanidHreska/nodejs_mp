@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prestart": "npm run lint",
-    "start": "nodemon --exec npx babel-node app.js",
+    "start": "nodemon --exec npx babel-node index.js",
     "test": "",
     "lint": "npx eslint ./"
   },
@@ -33,8 +33,9 @@
   "dependencies": {
     "csvtojson": "1.1.9",
     "eventemitter3": "3.0.1",
+    "express": "4.16.3",
     "lodash": "4.17.10",
-    "minimist": "^1.2.0",
-    "through2": "^2.0.3"
+    "minimist": "1.2.0",
+    "through2": "2.0.3"
   }
 }
