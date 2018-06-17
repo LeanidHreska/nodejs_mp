@@ -18,10 +18,12 @@ const data = {
     {
       id: '1',
       email: 'productAdmin@gmail.com',
+      password: '823214',
       role: 'admin',
     }, {
       id: '2',
       email: 'user@gmail.com',
+      password: '823214',
       role: 'user',
     }
   ],
