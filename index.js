@@ -6,7 +6,7 @@ import productRouter from './src/routes/products';
 import userRouter from './src/routes/users';
 import authRouter from './src/routes/auth';
 
-const port = process.env.PORT || 8070;
+const port = process.env.PORT || 8020;
 
 sequelize.sync().then(() => {
   app.use('/', productRouter);
