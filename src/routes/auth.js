@@ -1,18 +1,20 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import passport from 'passport';
-import data from '../fakeData/data';
+import Models from '../db/models';
 import creds from '../../config/credentials.json';
 
 const router = express.Router();
+
+const { User } = Models;
 
 router.post('/auth',
   passport.authenticate('local'),
   (req, res) => {
     const { login, password } = req.body;
-    const isUserExist = data.users.some(user => user.email === login && user.password === password);
+    const user = User.findOne({ login, password });
     
-    if (isUserExist) {
+    if (user) {
       const token = jwt.sign({ login, password }, creds.local.secret, { expiresIn: 60 * 60 });
       res.send(token);
     } else {
