@@ -6,6 +6,7 @@ import creds from '../config/credentials.json';
 
 import cookiesParser from '../src/middlewares/cookiesParser';
 import queryParser from '../src/middlewares/queryParser';
+import dateUpdater from '../src/middlewares/dateUpdater';
 
 import localAuthStrategy from '../src/auth/localStrategy';
 import facebookAuthStrategy from '../src/auth/facebookStrategy';
@@ -31,6 +32,7 @@ const middlewares = app => {
   app.use(passport.session());
   app.use(cookiesParser);
   app.use(queryParser);
+  app.use(dateUpdater);
 
 };
 
