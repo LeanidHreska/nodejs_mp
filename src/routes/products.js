@@ -1,17 +1,20 @@
 import express from 'express';
+import Models from '../db/models';
 import data from '../fakeData/data';
 import jwtVerifier from '../middlewares/jwtVerifier';
+
+const Product = Models.Product;
 
 const router = express.Router();
 
 router.get('/api/products', jwtVerifier, (req, res) => {
-  console.log(req.parsedQuery);
-  res.json(data.products);
+  Product.findAll()
+    .then(products => res.json(products));
 });
 
 router.get('/api/products/:id', jwtVerifier, (req, res) => {
-  const product = data.products.filter(product => product.id === req.params.id);
-  product === [] ? res.send({}) : res.json(product[0]);
+  Product.findById(req.params.id)
+    .then(product => res.json(product));
 });
 
 router.get('/api/products/:id/reviews', jwtVerifier, (req, res) => {
@@ -20,8 +23,9 @@ router.get('/api/products/:id/reviews', jwtVerifier, (req, res) => {
 });
 
 router.post('/api/products', jwtVerifier, (req, res) => {
-  data.products = [ ...data.products, req.body];
-  res.json(req.body);
+  Product.create({
+    ...req.body,
+  }).then(product => res.json(product));
 });
 
 export default router;

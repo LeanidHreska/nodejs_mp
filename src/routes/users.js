@@ -1,12 +1,14 @@
 import express from 'express';
-import data from '../fakeData/data';
+import Models from '../db/models';
 import jwtVerifier from '../middlewares/jwtVerifier';
 
+const User = Models.User;
 
 const router = express.Router();
 
 router.get('/api/users', jwtVerifier, (req, res) => {
-  res.json(data.users);
+  User.findAll()
+    .then(users => res.json(users));
 });
 
 
