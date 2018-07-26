@@ -1,13 +1,19 @@
-export default function defineProductModel(sequelize, types) {
-  const Product = sequelize.define('Product', {
-    title: {
-      type: types.STRING,
-      allowNull: false,
-    },
-    color: {
-      type: types.STRING
-    }
-  });
+import mongoose from 'mongoose';
 
-  return Product;
-}
+import data from '../../mockData/data';
+
+const productSchema = mongoose.Schema({
+  title: String,
+  color: String,
+  lastModifiedDate: Date,
+});
+
+const Product = mongoose.model('Product', productSchema);
+
+Product.findOne({}, (err, product) => {
+  if (!product) {
+    Product.insertMany(data.products);
+  }
+});
+
+export default Product;

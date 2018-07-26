@@ -1,20 +1,22 @@
 import Sequelize from 'sequelize';
 import sequelize from '../connect';
-import defineProduct from './Product';
-import defineUser from './User';
+import defineProduct from './ProductSQL';
+import defineUser from './UserSQL';
 
-import data from '../../fakeData/data';
+import City from './City';
+import Product from './Product';
+import User from './User';
 
-const Product = defineProduct(sequelize, Sequelize);
-const User = defineUser(sequelize, Sequelize);
+const ProductSQL = defineProduct(sequelize, Sequelize);
+const UserSQL = defineUser(sequelize, Sequelize);
 
-Product.count().then(count => {
-  (count === 0) && Product.bulkCreate(data.products);
-});
 
 const Models = {
+  ProductSQL,
+  UserSQL,
+  City,
   Product,
-  User,
+  User
 };
 
 export default Models;

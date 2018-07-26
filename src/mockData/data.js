@@ -13,27 +13,11 @@ const data = {
   ],
   users: [
     {
-      id: '1',
-      email: 'productAdmin@gmail.com',
+      login: 'productAdmin@gmail.com',
       password: '823214',
-      role: 'admin',
     }, {
-      id: '2',
-      email: 'user@gmail.com',
+      login: 'user@gmail.com',
       password: '823214',
-      role: 'user',
-    }
-  ],
-  reviews: [
-    {
-      productId: '1',
-      reviewer: 'AlekseY1',
-      comment: 'Nice!'
-    },
-    {
-      productId: '2',
-      reviewer: 'Nik',
-      comment: 'Great'
     }
   ],
 };
