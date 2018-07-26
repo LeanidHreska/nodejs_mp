@@ -1,16 +1,13 @@
 const data = {
   products: [
     {
-      id: '1',
-      name: 'Playstation 3',
+      title: 'Playstation 3',
       color: 'white',
     }, {
-      id: '2',
-      name: 'Xbox One',
+      title: 'Xbox One',
       color: 'white',
     }, {
-      id: '3',
-      name: 'Playstation 4',
+      title: 'Playstation 4',
       color: 'black',
     }
   ],

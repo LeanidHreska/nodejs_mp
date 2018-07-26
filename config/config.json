@@ -1,3 +1,8 @@
 {
-  "name": "Node.js Homework Application"
+  "name": "Node.js Homework Application",
+  "username": "postgres",
+  "password": "MyPass",
+  "database": "nodejs_mp",
+  "host": "localhost",
+  "dialect": "postgres"
 }
