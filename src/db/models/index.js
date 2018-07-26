@@ -10,6 +10,7 @@ import User from './User';
 const ProductSQL = defineProduct(sequelize, Sequelize);
 const UserSQL = defineUser(sequelize, Sequelize);
 
+
 const Models = {
   ProductSQL,
   UserSQL,
