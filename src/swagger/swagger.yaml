@@ -1,0 +1,351 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: NodeJS_mp API
+tags:
+- name: auth
+  description: Operations with authentication
+- name: city
+  description: Operations with city
+- name: product
+  description: Operations about product
+- name: user
+  description: Operations about user
+
+paths:
+  /auth:
+    post:
+      tags:
+      - auth
+      summary: authenticate and return valid JWT
+      operationId: authenticateUserLocale
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Object with user's creds
+        required: true
+        schema:
+          $ref: '#/definitions/UserCreds'
+      responses:
+        200:
+          description: All is OK
+          schema:
+            type: string
+            example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6InByb2R1Y3RBZG1pbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IjgyMzIxNCIsImlhdCI6MTUzMjU5MzI3OSwiZXhwIjoxNTMyNTk2ODc5fQ.4mQJDhz6sDO7MG8uLsGOnY7GtEbIa5IP2y_CR5qy4iY
+        404:
+          description: User not found
+  /auth/facebook:
+    get:
+      tags:
+      - auth
+      summary: Authenticate by Facebook
+      operationId: authenticateUserFacebook
+      produces:
+      - application/json
+      responses:
+        200:
+          description: All is OK
+        400:
+          description: Invalid status value
+  /api/cities:
+    get:
+      tags:
+      - city
+      summary: return all cities
+      operationId: returnCities
+      produces:
+      - application/json
+      responses:
+        200:
+          description: All is OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/City'
+    post:
+      tags:
+      - city
+      summary: create a city
+      operationId: createCity
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Object with data
+        required: true
+        schema:
+          $ref: '#/definitions/CityForCreate'
+      responses:
+        200:
+          description: All is Ok
+          schema:
+            $ref: '#/definitions/City'
+  /api/cities/:cityId:
+    put:
+      tags:
+      - city
+      summary: change city by id
+      description: Change city's data and return changed object
+      operationId: putCity
+      produces:
+      - application/json
+      parameters:
+      - name: cityId
+        in: path
+        description: ID of city to change
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: Object with data
+        required: true
+        schema:
+          $ref: '#/definitions/CityForCreate'
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/City'
+    delete:
+      tags:
+      - city
+      summary: delete city by id
+      operationId: deleteCity
+      produces:
+      - application/json
+      parameters:
+      - name: cityId
+        in: path
+        description: ID of city that needs to be deleted
+        required: true
+        type: string
+      responses:
+        200:
+          description: All is Ok
+          schema:
+            $ref: '#/definitions/City'
+  /api/cities/random:
+    get:
+      tags:
+      - city
+      summary: return random city
+      operationId: getRandomCity
+      produces:
+      - application/json
+      responses:
+        200:
+          description: All is OK
+          schema:
+            $ref: '#/definitions/City'
+  /api/products:
+    get:
+      tags:
+      - product
+      summary: Returns all products
+      description: Returns all products
+      operationId: getProducts
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: All is OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+    post:
+      tags:
+      - product
+      summary: create product
+      description: create a product with passed data
+      operationId: createProduct
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Object with data
+        required: true
+        schema:
+          $ref: '#/definitions/ProductForCreate'
+      responses:
+        200:
+          description: All is OK
+          schema:
+            $ref: '#/definitions/Product'
+  /api/products/:productId:
+    get:
+      tags:
+      - product
+      summary: get product by id
+      description: return product by id
+      operationId: getProduct
+      produces:
+      - application/json
+      parameters:
+      - name: productId
+        in: path
+        description: ID of product to get
+        required: true
+        type: string
+      responses:
+        200:
+          description: All is OK
+          schema:
+            $ref: '#/definitions/Product'
+    delete:
+      tags:
+        - product
+      summary: delete product by id
+      operationId: deleteProduct
+      produces:
+      - application/json
+      parameters:
+      - name: productId
+        in: path
+        description: ID of product that needs to be deleted
+        required: true
+        type: string
+      responses:
+        200:
+          description: All is Ok
+          schema:
+            $ref: '#/definitions/Product'
+  /api/users/:
+    get:
+      tags:
+      - user
+      summary: Get all users
+      operationId: getUsers
+      produces:
+      - application/json
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+  /api/users/:userId:
+    delete:
+      tags:
+      - user
+      summary: Delete user
+      description: delete user and return back
+      operationId: deleteUser
+      produces:
+      - application/json
+      parameters:
+      - name: userId
+        in: path
+        description: The name that needs to be deleted
+        required: true
+        type: string
+      responses:
+        200:
+          description: All is Ok
+          schema:
+            $ref: '#/definitions/User'
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 5b3df97558398d273c79db3f
+      login:
+        type: integer
+        example: leonidgresko98@gmail.com
+      password:
+        type: string
+        example: Pass1234
+  Product:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 5b3df97558398d273c79db3f
+      title:
+        type: string
+        example: Playstation 3
+      color:
+        type: string
+        example: black
+  ProductForCreate:
+    type: object
+    properties:
+      title:
+        type: string
+        example: Playstation 3
+      color:
+        type: string
+        example: black
+  City:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 5b3df97558398d273c79db3f
+      name:
+        type: string
+        example: Gomel
+      country:
+        type: string
+        example: Belarus
+      capital:
+        type: boolean
+        example: false
+      location:
+        type: object
+        properties:
+          lat:
+            type: number
+            example: 152
+          long:
+            type: number
+            example: 42
+  CityForCreate:
+    type: object
+    properties:
+      name:
+        type: string
+        example: Gomel
+      country:
+        type: string
+        example: Belarus
+      capital:
+        type: boolean
+        example: false
+      location:
+        type: object
+        properties:
+          lat:
+            type: number
+            example: 152
+          long:
+            type: number
+            example: 42
+  UserCreds:
+    type: object
+    required:
+    - login
+    - password
+    properties:
+      login:
+        type: string
+        example: leonidgresko98@gmail.com
+      password:
+        type: string
+        example: Pass1234
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /LeanidHreska/nodejs_mp/1.0.0
+schemes:
+ - https
+ - http
